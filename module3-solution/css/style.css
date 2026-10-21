@@ -1,0 +1,77 @@
+/* General page styling */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #222;
+    background-color: #ffffff;
+}
+
+/* Navigation bar */
+#header-nav {
+    background-color: #bdbdbd;
+    border-radius: 0;
+    border: 1px solid #333;
+    margin-bottom: 20px;
+}
+
+.navbar-brand {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #222 !important;
+}
+
+/* Mobile menu */
+#mobile-menu {
+    background-color: #e6e6e6;
+}
+
+#mobile-menu ul {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#mobile-menu ul li {
+    text-align: center;
+    border-top: 1px solid #333;
+}
+
+#mobile-menu ul li a {
+    color: #222;
+    font-weight: bold;
+}
+
+/* Main heading */
+h1 {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+/* Tall menu section */
+.menu-section {
+    background-color: #bdbdbd;
+    padding: 15px;
+    margin-bottom: 30px;
+    min-height: 1000px;
+}
+
+.menu-section h3 {
+    margin-top: 0;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.menu-section p {
+    line-height: 1.6;
+}
+
+/* Desktop and tablet */
+@media (min-width: 768px) {
+    .navbar-header {
+        float: left;
+    }
+}
+
+/* Mobile */
+@media (max-width: 767
