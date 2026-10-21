@@ -1,77 +1,87 @@
 /* General page styling */
 body {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    color: #222;
-    background-color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #222;
+  background-color: #ffffff;
 }
 
 /* Navigation bar */
 #header-nav {
-    background-color: #bdbdbd;
-    border-radius: 0;
-    border: 1px solid #333;
-    margin-bottom: 20px;
+  background-color: #f5e6cc;
+  border-radius: 0;
+  border: 1px solid #333;
+  margin-bottom: 20px;
 }
 
+/* Restaurant name */
 .navbar-brand {
-    font-size: 1.6em;
-    font-weight: bold;
-    color: #222 !important;
+  font-size: 1.6em;
+  font-weight: bold;
+  color: #222 !important;
 }
 
-/* Mobile menu */
+/* Mobile menu links */
 #mobile-menu {
-    background-color: #e6e6e6;
+  border-top: 1px solid #333;
 }
 
 #mobile-menu ul {
-    margin-top: 0;
-    margin-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 #mobile-menu ul li {
-    text-align: center;
-    border-top: 1px solid #333;
+  background-color: #fff3e0;
+  border-bottom: 1px solid #ccc;
 }
 
 #mobile-menu ul li a {
-    color: #222;
-    font-weight: bold;
+  color: #333;
+  font-weight: bold;
+}
+
+#mobile-menu ul li a:hover {
+  background-color: #e8d5b7;
 }
 
 /* Main heading */
 h1 {
-    margin-top: 20px;
-    margin-bottom: 30px;
-    font-size: 2em;
-    font-weight: bold;
+  margin-top: 25px;
+  margin-bottom: 30px;
+  font-weight: bold;
 }
 
-/* Tall menu section */
+/* Vegetarian menu sections */
 .menu-section {
-    background-color: #bdbdbd;
-    padding: 15px;
-    margin-bottom: 30px;
-    min-height: 1000px;
+  background-color: #f3f0e8;
+  padding: 20px;
+  margin-bottom: 25px;
+  border: 1px solid #333;
+  min-height: 400px;
 }
 
-.menu-section h3 {
-    margin-top: 0;
-    font-size: 1.3em;
-    font-weight: bold;
+.menu-section h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-weight: bold;
 }
 
 .menu-section p {
-    line-height: 1.6;
+  line-height: 1.8;
 }
 
-/* Desktop and tablet */
-@media (min-width: 768px) {
-    .navbar-header {
-        float: left;
-    }
-}
+/* Mobile adjustments */
+@media (max-width: 767px) {
+  .navbar-brand {
+    font-size: 1.5em;
+  }
 
-/* Mobile */
-@media (max-width: 767
+  h1 {
+    font-size: 30px;
+  }
+
+  .menu-section {
+    margin-bottom: 20px;
+  }
+}
