@@ -1,109 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Food, LLC - Our Menu</title>
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kaapi Corner – Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Source+Serif+4:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #e9efe9;
+    --ink: #12332b;
+    --muted: #4f6b62;
+    --accent: #e8b931;
+    --card: #f7faf6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Source Serif 4", Georgia, serif;
+    line-height: 1.6;
+  }
+  header {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 64px 24px 48px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  h1 {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+    font-weight: 800;
+    font-size: clamp(3rem, 12vw, 6rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  header p { margin-top: 16px; font-style: italic; color: #b9ccc3; max-width: 46ch; }
+  .tabs {
+    position: sticky; top: 0; z-index: 5;
+    background: var(--bg);
+    border-bottom: 2px solid var(--ink);
+  }
+  .tabs .wrap { display: flex; gap: 8px; overflow-x: auto; padding: 12px 24px; }
+  .tab {
+    font: 500 1rem "Bricolage Grotesque", system-ui, sans-serif;
+    background: none; color: var(--ink);
+    border: 2px solid var(--ink); border-radius: 999px;
+    padding: 6px 18px; cursor: pointer; white-space: nowrap;
+  }
+  .tab[aria-pressed="true"] { background: var(--accent); }
+  .tab:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+  main { padding: 32px 24px 64px; }
+  .item { padding: 18px 0; border-bottom: 1px solid #c3d1c8; }
+  .row { display: flex; align-items: baseline; gap: 10px; }
+  .name { font: 800 1.25rem "Bricolage Grotesque", system-ui, sans-serif; }
+  .dots { flex: 1; border-bottom: 2px dotted #9fb5aa; transform: translateY(-4px); }
+  .price { font: 500 1.15rem "Bricolage Grotesque", system-ui, sans-serif; }
+  .desc { color: var(--muted); max-width: 52ch; }
+  .tag {
+    display: inline-block; margin-left: 8px;
+    background: var(--accent); border-radius: 6px;
+    padding: 0 8px; font-size: 0.8rem;
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  }
+  footer { background: var(--card); border-top: 2px solid var(--ink); padding: 32px 24px; }
+  footer p { max-width: 52ch; }
+</style>
 </head>
-
 <body>
 
-  <!-- Navigation Bar -->
-  <nav class="navbar navbar-default" id="header-nav">
-    <div class="container-fluid">
+<header>
+  <div class="wrap">
+    <h1>Kaapi Corner</h1>
+    <p>Filter coffee, fresh bakes and all-day breakfast. Open 8 am to 10 pm, every day.</p>
+  </div>
+</header>
 
-      <div class="navbar-header">
+<nav class="tabs" aria-label="Menu categories">
+  <div class="wrap" id="tabs"></div>
+</nav>
 
-        <!-- Mobile Hamburger Button -->
-        <button type="button"
-                class="navbar-toggle collapsed visible-xs"
-                data-toggle="collapse"
-                data-target="#mobile-menu"
-                aria-expanded="false">
+<main>
+  <div class="wrap" id="menu"></div>
+</main>
 
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+<footer>
+  <div class="wrap">
+    <p>Prices are in rupees and include tax. Tell us about any allergies before you order.</p>
+  </div>
+</footer>
 
-        </button>
+<script>
+  // Edit this list to change the menu.
+  const menu = [
+    { cat: "Coffee", name: "Filter coffee", price: 60, desc: "South Indian decoction, hot milk, brass tumbler.", tag: "Bestseller" },
+    { cat: "Coffee", name: "Cappuccino", price: 140, desc: "Double shot with steamed milk and thick foam." },
+    { cat: "Coffee", name: "Cold brew", price: 160, desc: "Steeped for 18 hours, served over ice." },
+    { cat: "Coffee", name: "Mocha", price: 170, desc: "Espresso, dark chocolate and milk." },
+    { cat: "Tea & more", name: "Masala chai", price: 50, desc: "Ginger, cardamom and strong Assam leaf." },
+    { cat: "Tea & more", name: "Iced lemon tea", price: 110, desc: "Black tea, lemon and mint." },
+    { cat: "Tea & more", name: "Hot chocolate", price: 150, desc: "Melted dark chocolate and steamed milk." },
+    { cat: "Breakfast", name: "Masala dosa", price: 120, desc: "Crisp dosa, potato palya, coconut chutney.", tag: "Veg" },
+    { cat: "Breakfast", name: "Idli vada", price: 90, desc: "Two idlis, one vada, sambar and chutney.", tag: "Veg" },
+    { cat: "Breakfast", name: "Egg toast", price: 130, desc: "Scrambled eggs on buttered sourdough." },
+    { cat: "Bakes", name: "Butter croissant", price: 95, desc: "Baked every morning." },
+    { cat: "Bakes", name: "Banana walnut cake", price: 120, desc: "A thick slice with a coffee glaze.", tag: "Veg" },
+    { cat: "Bakes", name: "Chocolate brownie", price: 110, desc: "Fudgy centre, crisp top." }
+  ];
 
-        <!-- Restaurant Name -->
-        <a class="navbar-brand" href="#">Food, LLC</a>
+  const cats = ["All", ...new Set(menu.map(i => i.cat))];
+  const tabsEl = document.getElementById("tabs");
+  const menuEl = document.getElementById("menu");
+  let active = "All";
 
-      </div>
+  function render() {
+    tabsEl.innerHTML = cats.map(c =>
+      `<button class="tab" aria-pressed="${c === active}" data-cat="${c}">${c}</button>`
+    ).join("");
 
-      <!-- Mobile Navigation Menu -->
-      <div class="collapse navbar-collapse" id="mobile-menu">
+    const items = menu.filter(i => active === "All" || i.cat === active);
+    menuEl.innerHTML = items.map(i => `
+      <article class="item">
+        <div class="row">
+          <span class="name">${i.name}${i.tag ? `<span class="tag">${i.tag}</span>` : ""}</span>
+          <span class="dots"></span>
+          <span class="price">₹${i.price}</span>
+        </div>
+        <p class="desc">${i.desc}</p>
+      </article>`).join("");
+  }
 
-        <ul class="nav navbar-nav visible-xs text-center">
+  tabsEl.addEventListener("click", e => {
+    const btn = e.target.closest(".tab");
+    if (!btn) return;
+    active = btn.dataset.cat;
+    render();
+    tabsEl.querySelector(`[data-cat="${active}"]`).focus();
+  });
 
-          <li>
-            <a href="#paneer">Paneer</a>
-          </li>
-
-          <li>
-            <a href="#biryani">Veg Biryani</a>
-          </li>
-
-          <li>
-            <a href="#dosa">Dosa</a>
-          </li>
-
-        </ul>
-
-      </div>
-
-    </div>
-  </nav>
-
-
-  <!-- Main Menu Heading -->
-  <div class="container-fluid">
-
-    <h1 class="text-center">Our Menu</h1>
-
-    <div class="row">
-
-      <div class="col-xs-12">
-
-        <!-- Paneer Section -->
-        <section class="menu-section" id="paneer">
-
-          <h2 class="text-center">Paneer</h2>
-
-          <p>
-            Welcome to Food, LLC! We believe that good food brings
-            people together. Our restaurant serves delicious pure
-            vegetarian dishes prepared with fresh ingredients and
-            authentic Indian spices.
-
-            Enjoy our rich Paneer Butter Masala, creamy Shahi Paneer,
-            flavourful Kadai Paneer, and delicious Paneer Tikka.
-            Every dish is prepared with care to give you a wonderful
-            dining experience.
-
-            We focus on quality, taste, freshness, and customer
-            satisfaction. Whether you are visiting with friends or
-            family, we want every meal to be special.
-
-            Thank you for choosing Food, LLC!
-          </p>
-
-        </section>
-
-        <!-- Veg Biryani Section -->
-        <section class="menu-section" id="biryani">
-
-          <h2 class="text-center">Veg Biryani</h2>
-
-          <p>
-            Enjoy the authentic taste of Indian vegetarian bir
+  render();
+</script>
+</body>
+</html>
